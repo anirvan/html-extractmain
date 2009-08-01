@@ -8,10 +8,11 @@ license: perl
 resources:
   license: http://dev.perl.org/licenses/
 build_requires:
+  Test::More: 0
+requires:
   Carp: 0
   HTML::TreeBuilder: 3.23
   Scalar::Util: 1.18
-  Test::More: 0
 configure_requires:
   Module::Build: 0.34
 provides:

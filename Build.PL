@@ -7,12 +7,12 @@ my $builder = Module::Build->new(
                        license     => 'perl',
                        dist_author => 'Anirvan Chatterjee <anirvan@cpan.org>',
                        dist_version_from => 'lib/HTML/ExtractMain.pm',
-                       build_requires    => {
-                                           'Carp'              => 0,
-                                           'HTML::TreeBuilder' => 3.23,
-                                           'Scalar::Util'      => 1.18,
-                                           'Test::More'        => 0,
+                       requires          => {
+                                     'Carp'              => 0,
+                                     'HTML::TreeBuilder' => 3.23,
+                                     'Scalar::Util'      => 1.18,
                        },
+                       build_requires     => { 'Test::More' => 0, },
                        add_to_cleanup     => ['HTML-ExtractMain-*'],
                        create_makefile_pl => 'traditional',
 );

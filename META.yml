@@ -1,0 +1,24 @@
+---
+name: HTML-ExtractMain
+version: 0.10
+author:
+  - 'Anirvan Chatterjee <anirvan@cpan.org>'
+abstract: Extract the main content of a web page
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Carp: 0
+  HTML::TreeBuilder: 3.23
+  Scalar::Util: 1.18
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.34
+provides:
+  HTML::ExtractMain:
+    file: lib/HTML/ExtractMain.pm
+    version: 0.10
+generated_by: Module::Build version 0.34
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4

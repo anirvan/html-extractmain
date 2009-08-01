@@ -188,7 +188,11 @@ L<http://search.cpan.org/dist/HTML-ExtractMain/>
 
 =head1 SEE ALSO
 
-* C<HTML::Feature>
+=over 4
+
+=item * C<HTML::Feature>
+
+=back
 
 =head1 ACKNOWLEDGEMENTS
 

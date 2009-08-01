@@ -1,4 +1,4 @@
-HTML-ExtractMain
+HTML::ExtractMain
 
 HTML::ExtractMain takes HTML content, and extracts the HTML snippet
 representing the main body of the page, skipping headers, footers,

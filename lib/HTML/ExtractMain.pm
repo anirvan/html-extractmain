@@ -191,6 +191,7 @@ L<http://search.cpan.org/dist/HTML-ExtractMain/>
 =over 4
 
 =item * C<HTML::Feature>
+=item * C<HTML::ExtractContent>
 
 =back
 

@@ -10,6 +10,7 @@ my $builder = Module::Build->new(
        meta_merge        => {
            resources =>
                { repository => 'http://github.com/anirvan/html-extractmain' },
+           keywords => ['readability'],
        },
        requires => { 'Carp'              => 0,
                      'HTML::TreeBuilder' => 3.23,

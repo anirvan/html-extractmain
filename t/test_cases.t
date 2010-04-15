@@ -1,8 +1,8 @@
 #!perl
 
-use HTML::Parse qw( parse_html );
 use File::Slurp qw( slurp );
-use HTML::FormatText;
+use HTML::FormatText 2.04;
+use HTML::TreeBuilder;
 use Test::More;
 use HTML::ExtractMain 'extract_main_html';
 
@@ -77,9 +77,11 @@ my $html_formatter;
 
 sub html_to_text {
     $html_formatter ||= HTML::FormatText->new( lm => 0, rm => 1_000_000 );
+
     my $html_content = shift;
-    my $parsed       = parse_html($html_content);
-    my $plain_text   = $html_formatter->format($parsed);
+    my $parsed_tree
+        = eval { HTML::TreeBuilder->new_from_content($html_content) };
+    my $plain_text = $html_formatter->format($parsed_tree);
     return $plain_text;
 }
 

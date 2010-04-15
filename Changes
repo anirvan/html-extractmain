@@ -1,5 +1,8 @@
 Revision history for HTML-ExtractMain
 
+0.50    April 15, 2010
+        Added tests of real content, details to documentation
+
 0.10    August 1, 2009
         First version
 

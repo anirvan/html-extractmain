@@ -203,7 +203,7 @@ L<http://lab.arc90.com/experiments/readability/>.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 Anirvan Chatterjee, all rights reserved.
+Copyright 2009-2010 Anirvan Chatterjee, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

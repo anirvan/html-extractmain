@@ -199,7 +199,8 @@ L<http://search.cpan.org/dist/HTML-ExtractMain/>
 
 The Readability algorithm is ported from Arc90's JavaScript original,
 built as part of the excellent Readability application, online at
-L<http://lab.arc90.com/experiments/readability/>.
+L<http://lab.arc90.com/experiments/readability/>, repository at
+L<http://code.google.com/p/arc90labs-readability/>.
 
 =head1 COPYRIGHT & LICENSE
 

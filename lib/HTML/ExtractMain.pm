@@ -10,6 +10,23 @@ use warnings;
 
 our @EXPORT_OK = qw( extract_main_html );
 
+my %readability_regexps = (
+    unlikelyCandidatesRe =>
+        /combx|comment|disqus|foot|header|menu|rss|shoutbox|sidebar|sponsor/i,
+    okMaybeItsACandidateRe => /and|article|body|column|main/i,
+    positiveRe =>
+        /article|body|content|entry|hentry|page|pagination|post|text/i,
+    negativeRe =>
+        /combx|comment|contact|foot|footer|footnote|link|media|meta|promo|related|scroll|shoutbox|sponsor|tags|widget/i,
+    divToPElementsRe => /<(a|blockquote|dl|div|img|ol|p|pre|table|ul)/i,
+    replaceBrsRe     => /(<br[^>]*>[ \n\r\t]*){2,}/gi,
+    replaceFontsRe   => /<(\/?)font[^>]*>/gi,
+    trimRe           => /^\s+|\s+$/g,
+    normalizeRe      => /\s{2,}/g,
+    killBreaksRe     => /(<br\s*\/?>(\s|&nbsp;?)*){1,}/g,
+    videoRe          => /http:\/\/(www\.)?(youtube|vimeo)\.com/i
+);
+
 sub extract_main_html {
     my $arg = shift;
 
@@ -33,6 +50,37 @@ sub extract_main_html {
 
     # Use the Readability algorithm, inspired by:
     # http://lab.arc90.com/experiments/readability/js/readability.js
+
+    #############################################################
+    # Port of Readability.prepDocument()
+    #############################################################
+
+    #   ignoring body creation
+    #   ignoring frame handling code
+
+    #   remove scripts, stylesheets
+    foreach my $element ( $tree->find_by_tag_name( 'script', 'style' ),
+                          $tree->look_down('_tag', 'link', 'rel', 'stylesheet'
+                          )
+        ) {
+        $element->delete;
+    }
+
+    #   ignoring "Turn all double br's into p's" -- may want to revisit
+
+    #############################################################
+    # Port of Readability.prepArticle()
+    #############################################################
+
+    # ignoring cleaning of inline styles -- may want to revisit
+    # ignoring killBreaks -- may want to revisit
+
+    _clean('form');
+    _clean('object');
+    _clean('h1');
+
+    # ignoring h2 removal -- may want to revisit
+    _clean('iframe');
 
     # Study all the paragraphs and find the chunk that has the best score.
     # A score is determined by things like: Number of <p>'s, commas,
@@ -87,6 +135,37 @@ sub extract_main_html {
     } else {
         return;
     }
+}
+
+# remove all instances of selected tag (except for approved movies)
+sub _clean_tags {
+
+}
+
+# remove "fishy instances of selected tag
+sub _clean_conditionally {
+
+}
+
+# takes an element object
+# returns a positive or negative number, indicating whether it's good or bad
+sub _get_class_weight {
+    my $element = shift;
+
+    my $weight = 0;
+
+    foreach
+        my $attr ( $element->attribute('name'), $element->attribute('id') ) {
+        if ( defined $attr and length $attr ) {
+            if ( $attr =~ $readability_regexps{negativeRe} ) {
+                $weight -= 25;
+            } elsif ( $attr =~ $readability_regexps{positiveRe} ) {
+                $weight += 25;
+            }
+        }
+    }
+
+    return $weight;
 }
 
 =head1 NAME

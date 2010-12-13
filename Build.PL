@@ -14,6 +14,7 @@ my $builder = Module::Build->new(
        },
        requires => { 'Carp'              => 0,
                      'HTML::TreeBuilder' => 3.23,
+                     'Object::Destroyer' => 2.00,
                      'Scalar::Util'      => 1.18,
        },
        build_requires => { 'Test::More'       => 0,

@@ -3,6 +3,7 @@
 package HTML::ExtractMain;
 use Carp qw( carp );
 use HTML::TreeBuilder;
+use Object::Destroyer 2.0;
 use Scalar::Util qw( refaddr );
 use base qw( Exporter );
 use strict;
@@ -30,6 +31,10 @@ sub extract_main_html {
             return;
         }
     }
+
+    # Remove any lingering circular references. Details at:
+    # http://www.perl.com/pub/2007/06/07/better-code-through-destruction.html
+    my $sentry = Object::Destroyer->new( $tree, 'delete' );
 
     # Use the Readability algorithm, inspired by:
     # http://lab.arc90.com/experiments/readability/js/readability.js

@@ -100,11 +100,11 @@ HTML::ExtractMain - Extract the main content of a web page
 
 =head1 VERSION
 
-Version 0.50
+Version 0.60
 
 =cut
 
-our $VERSION = '0.50';
+our $VERSION = '0.60';
 
 =head1 SYNOPSIS
 

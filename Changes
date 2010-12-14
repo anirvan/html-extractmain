@@ -1,7 +1,10 @@
 Revision history for HTML-ExtractMain
 
+0.61    December 13, 2010
+        Fixed the other half of the memory leak
+
 0.60    December 13, 2010
-        Fixed a memory thanks to David Guthrie; documentation fixes
+        Fixed a memory leak thanks to David Guthrie; documentation fixes
 
 0.50    April 15, 2010
         Added tests of real content, details to documentation

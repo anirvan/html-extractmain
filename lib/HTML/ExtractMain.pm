@@ -88,6 +88,7 @@ sub extract_main_html {
         $best_parent_element->detach;
         my $html = $best_parent_element->as_XML;
         $html =~ s{^<body>(.*)</body>\s*$}{$1}s;    # kill wrapping <body>
+        $best_parent_element->delete;
         return $html;
     } else {
         return;
@@ -139,7 +140,8 @@ algorithm to detect the main body of the page, usually skipping
 headers, footers, navigation, etc.
 
 It takes a single argument, either an HTML string, or an
-HTML::TreeBuilder tree.
+HTML::TreeBuilder tree. (If passed a tree, the tree will be modified
+and destroyed.)
 
 If the HTML's main content is found, it's returned as an XHTML
 snippet. The returned HTML will I<not> look like what you put in.

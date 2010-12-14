@@ -1,0 +1,15 @@
+#!perl
+
+# script to be run by module author
+
+use Devel::Leak::Object qw{ GLOBAL_bless };
+$Devel::Leak::Object::TRACKSOURCELINES = 1;
+
+use HTML::ExtractMain 'extract_main_html';
+for ( 1 .. 1000 ) {
+    my $html = extract_main_html('<p>Hi!</p>');
+}
+
+# Local Variables:
+# mode: perltidy
+# End:

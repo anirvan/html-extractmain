@@ -6,6 +6,7 @@ WriteMakefile
   'VERSION_FROM' => 'lib/HTML/ExtractMain.pm',
   'PREREQ_PM' => {
                    'Carp' => '0',
+                   'File::Slurp' => '9999.12',
                    'HTML::FormatText' => '2.04',
                    'HTML::TreeBuilder' => '3.23',
                    'Object::Destroyer' => '2',

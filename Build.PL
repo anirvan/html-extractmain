@@ -18,7 +18,8 @@ my $builder = Module::Build->new(
                      'Scalar::Util'      => 1.18,
        },
        build_requires => { 'Test::More'       => 0,
-                           'HTML::FormatText' => 2.04
+                           'HTML::FormatText' => 2.04,
+                           'File::Slurp'      => 9999.12,
        },
        add_to_cleanup     => ['HTML-ExtractMain-*'],
        create_makefile_pl => 'traditional',

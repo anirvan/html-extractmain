@@ -19,7 +19,7 @@ name: HTML-ExtractMain
 provides:
   HTML::ExtractMain:
     file: lib/HTML/ExtractMain.pm
-    version: 0.61
+    version: 0.62
 requires:
   Carp: 0
   HTML::TreeBuilder: 3.23
@@ -28,4 +28,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/anirvan/html-extractmain
-version: 0.61
+version: 0.62

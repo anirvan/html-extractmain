@@ -4,7 +4,7 @@ package HTML::ExtractMain;
 use Carp qw( carp );
 use HTML::TreeBuilder;
 use Object::Destroyer 2.0;
-use Scalar::Util qw( refaddr );
+use Scalar::Util qw( blessed refaddr );
 use base qw( Exporter );
 use strict;
 use warnings;
@@ -101,11 +101,11 @@ HTML::ExtractMain - Extract the main content of a web page
 
 =head1 VERSION
 
-Version 0.62
+Version 0.63
 
 =cut
 
-our $VERSION = '0.62';
+our $VERSION = '0.63';
 
 =head1 SYNOPSIS
 
@@ -212,7 +212,7 @@ L<http://code.google.com/p/arc90labs-readability/>.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009-2010 Anirvan Chatterjee, all rights reserved.
+Copyright 2009-2010, 2013 Anirvan Chatterjee, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

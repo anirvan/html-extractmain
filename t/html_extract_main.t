@@ -1,6 +1,6 @@
 #!perl
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 use_ok( 'HTML::ExtractMain', 'extract_main_html' );
 
@@ -26,6 +26,20 @@ is( $r,
     'main body extracted' );
 
 is( extract_main_html('<p>Hi!</p>'), '<p>Hi!</p>', 'simple content works' );
+
+#------------------------------------------------------------------------------
+# with HTML::TreeBuilder input
+
+{
+  require HTML::TreeBuilder;
+  my $simple = '<p>Hi!</p>';
+  my $tree = HTML::TreeBuilder->new_from_content($simple);
+  my $got = extract_main_html($tree);
+  is ($got, $simple, 'simple content as TreeBuilder');
+}
+
+
+#------------------------------------------------------------------------------
 
 # Local Variables:
 # mode: perltidy

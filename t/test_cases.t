@@ -34,7 +34,7 @@ plan tests => 5 * scalar @expected;
 foreach my $test_set (@expected) {
 
     my $name = $test_set->{name};
-    my $data = slurp($name) || die $name;
+    my $data = slurp($name, binmode => ':utf8') || die $name;
     my $main = extract_main_html($data);
 
     my $length = length $main;

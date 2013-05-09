@@ -1,7 +1,9 @@
 Revision history for HTML-ExtractMain
 
-0.63    January 19, 2013
+0.63    May 9, 2013
         Fixed missing "blessed()" for HTML::TreeBuilder input
+        Fixed undecoded UTF-8 warning in test cases
+        Added 'output_type' option and tests
 
 0.62    December 13, 2010
         Fixed error with build requirements

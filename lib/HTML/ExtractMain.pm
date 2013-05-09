@@ -32,6 +32,16 @@ sub extract_main_html {
         }
     }
 
+    my %options = @_;
+    if ( defined $options{output_type} )
+    {
+        $options{output_type} = lc($options{output_type});
+    }
+    else
+    {
+        $options{output_type} = "xhtml";
+    }
+
     # Remove any lingering circular references. Details at:
     # http://www.perl.com/pub/2007/06/07/better-code-through-destruction.html
     my $sentry = Object::Destroyer->new( $tree, 'delete' );
@@ -86,10 +96,28 @@ sub extract_main_html {
     if ($best_parent) {
         my $best_parent_element = $best_parent->{element};
         $best_parent_element->detach;
-        my $html = $best_parent_element->as_XML;
-        $html =~ s{^<body>(.*)</body>\s*$}{$1}s;    # kill wrapping <body>
-        $best_parent_element->delete;
-        return $html;
+
+        my $output;
+        if ( $options{output_type} eq 'tree' )
+        {
+            $output = $best_parent_element;
+        }
+        elsif ( $options{output_type} eq 'html' )
+        {
+            $output = $best_parent_element->as_HTML;
+        }
+        else
+        {
+            $output = $best_parent_element->as_XML;
+        }
+
+        unless ( $options{output_type} eq 'tree' )
+        {
+            $output =~ s{^<body>(.*)</body>\s*$}{$1}s;    # kill wrapping <body>
+            $best_parent_element->delete;
+        }
+
+        return $output;
     } else {
         return;
     }
@@ -121,7 +149,7 @@ our $VERSION = '0.63';
     <div id="footer">Footer</div>
     END
 
-    my $main_html = extract_main_html($html);
+    my $main_html = extract_main_html($html, output_type => 'xhtml');
     if (defined $main_html) {
 	# do something with $main_html here
         # $main_html is '<div id="body"><p>Foo</p><p>Baz</p></div>'
@@ -139,14 +167,34 @@ C<extract_main_html> takes HTML content, and uses the Readability
 algorithm to detect the main body of the page, usually skipping
 headers, footers, navigation, etc.
 
-It takes a single argument, either an HTML string, or an
+The first argument is either an HTML string, or an
 HTML::TreeBuilder tree. (If passed a tree, the tree will be modified
 and destroyed.)
 
-If the HTML's main content is found, it's returned as an XHTML
-snippet. The returned HTML will I<not> look like what you put in.
-(Source formatting, e.g. indentation, will be removed, and you may get
-back XHTML when you put in HTML.)
+Remaining arguments are optional and represent key/value options. The
+available options are:
+
+=head3 output_type
+
+This determines what format to return data in. If not specified then
+xhtml format will be used. Valid formats are:
+
+=over 4
+
+=item C<xhtml>
+
+=item C<html>
+
+=item C<tree>
+
+=back
+
+If C<tree> is selected, then an L<HTML::Element> object will be
+returned instead of a string.
+
+If the HTML's main content is found, it's returned in the chosen
+output format. The returned HTML/XHTML will I<not> look like what you put
+in. (Source formatting, e.g. indentation, will be removed.)
 
 If a most relevant block of content is not found, C<extract_main_html>
 returns undef.

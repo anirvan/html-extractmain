@@ -7,8 +7,9 @@ build_requires:
   HTML::FormatText: 2.04
   Test::More: 0
 configure_requires:
-  Module::Build: 0.36
-generated_by: 'Module::Build version 0.3607'
+  Module::Build: 0.40
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.112621'
 keywords:
   - readability
 license: perl
@@ -19,7 +20,7 @@ name: HTML-ExtractMain
 provides:
   HTML::ExtractMain:
     file: lib/HTML/ExtractMain.pm
-    version: 0.62
+    version: 0.63
 requires:
   Carp: 0
   HTML::TreeBuilder: 3.23

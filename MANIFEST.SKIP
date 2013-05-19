@@ -1,3 +1,4 @@
 ^MYMETA.yml$
 .git
 xt
+^MYMETA\.json$

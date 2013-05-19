@@ -33,12 +33,9 @@ sub extract_main_html {
     }
 
     my %options = @_;
-    if ( defined $options{output_type} )
-    {
-        $options{output_type} = lc($options{output_type});
-    }
-    else
-    {
+    if ( defined $options{output_type} ) {
+        $options{output_type} = lc( $options{output_type} );
+    } else {
         $options{output_type} = "xhtml";
     }
 
@@ -98,22 +95,16 @@ sub extract_main_html {
         $best_parent_element->detach;
 
         my $output;
-        if ( $options{output_type} eq 'tree' )
-        {
+        if ( $options{output_type} eq 'tree' ) {
             $output = $best_parent_element;
-        }
-        elsif ( $options{output_type} eq 'html' )
-        {
+        } elsif ( $options{output_type} eq 'html' ) {
             $output = $best_parent_element->as_HTML;
-        }
-        else
-        {
+        } else {
             $output = $best_parent_element->as_XML;
         }
 
-        unless ( $options{output_type} eq 'tree' )
-        {
-            $output =~ s{^<body>(.*)</body>\s*$}{$1}s;    # kill wrapping <body>
+        unless ( $options{output_type} eq 'tree' ) {
+            $output =~ s{^<body>(.*)</body>\s*$}{$1}s;  # kill wrapping <body>
             $best_parent_element->delete;
         }
 
@@ -260,7 +251,8 @@ L<http://code.google.com/p/arc90labs-readability/>.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009-2010, 2013 Anirvan Chatterjee, all rights reserved.
+Copyright 2009-2013 Anirvan Chatterjee, Rupert Lane, kryde, all rights
+reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
